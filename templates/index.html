@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{{ url_for('static', filename='css/mdb.min.css') }}" rel="stylesheet">
+
+    <title>Загрузка .apk файла</title>
+</head>
+
+<body>
+
+
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Интеллектуальные методы автоматического составления тестов для проверки безопасности программного обеспечения</strong>
+    </h5>
+
+
+    <div class="container mt-3 mb-3 text-center">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+        {% for message in messages %}
+
+        {% if message[-1] == '0' %}
+        <div class="alert alert-success" role="alert">
+
+            {{ message[:-1] }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% elif message[-1] == '1' %}
+        <div class="alert alert-danger" role="alert">
+
+            {{ message[:-1] }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <!--Card content-->
+    <div class="card-body px-lg-5">
+
+        <!-- Form -->
+        <!-- Form -->
+        <form class="md-form text-center" style="color: #757575;" method="post" action="/"
+            enctype="multipart/form-data">
+
+            <div class="file-field">
+
+                <div class="btn btn-primary btn-sm float-left">
+                    <span>Выберите .apk файл</span>
+                    <input type="file" name="file" autocomplete="off" required>
+                </div>
+
+                <div class="file-path-wrapper">
+
+                    <input class="file-path validate" type="text" placeholder="Загрузите файл">
+                </div>
+
+            </div>
+
+            <div class="md-form">
+                <input name="path" type="text" id="materialLoginFormPassword" class="form-control" required>
+                <label for="materialLoginFormPassword">Путь, где будет храниться отчет и файлы ресурсов</label>
+              </div>
+              
+            <div class="container d-flex justify-content-center">
+                <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" style="width: 25rem;" type="submit">
+                    Обработать .apk файл
+                </button>
+            </div>  
+            
+
+        </form>
+
+
+    </div>
+
+    <!-- Material form subscription -->
+
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
+</body>
+
+</html>
