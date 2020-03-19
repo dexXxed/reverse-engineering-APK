@@ -6,6 +6,7 @@ import re
 import sys
 import logging
 from datetime import datetime
+from flask import flash
 
 from ninjadroid.use_cases.get_apk_info_in_html import GetApkInfoInHtml
 from ninjadroid.use_cases.get_apk_info_in_json import GetApkInfoInJson
@@ -19,7 +20,7 @@ logger = logging.getLogger("NinjaDroid")
 
 def read_target_file(filepath: str, no_string_processing: bool):
     apk = None
-    print("Reading target apk...")
+    flash("Reading target apk...")
     try:
         apk = APK(filepath, no_string_processing)
     except APKParsingError:
@@ -47,7 +48,7 @@ def extract_apk_info_to_directory(apk: APK, filepath: str, filename: str, output
     """
     if output_directory == "./":
         output_directory += filename
-    print("Target: " + filepath)
+    flash("Target: " + filepath)
     extract_apk_entries(apk, filepath, filename, output_directory)
     get_apk_info(apk, filename, output_directory)
 
@@ -69,4 +70,7 @@ def complete_apk_analyze(filename, path):
 
     filename_1 = get_apk_filename_without_extension(filename)
 
-    extract_apk_info_to_directory(apk, filename, filename_1, f"./{path}/{filename}-{datetime.now().strftime('%d.%m.%Y-%H:%M:%S')}/")
+    f = f"{filename}-{datetime.now().strftime('%d.%m.%Y-%H:%M:%S')}"
+
+    extract_apk_info_to_directory(apk, filename, filename_1, f"./{path}/{f}")
+    return f
